@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infranex Projects | Professional Pool Construction & Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+
+        @keyframes pulse-whatsapp {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-whatsapp 2.5s infinite;
+            transition: all 0.3s;
+            padding: 12px;
+        }
+
+        @media (min-width: 640px) {
+            .whatsapp-fab { width: 70px; height: 70px; bottom: 40px; right: 40px; }
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 500px;
+            padding-bottom: 2.5rem;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        #background-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .bg-overlay-heavy {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            z-index: -1;
+        }
+
+        .video-fallback {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #001f3f;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #f58220;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-slate-950 text-white selection:bg-orange-500 overflow-x-hidden">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner mb-4"></div>
+        <p class="text-white font-black tracking-[0.3em] uppercase text-xs italic">Infranex Projects</p>
+    </div>
+
+    <!-- Background -->
+    <video autoplay loop muted playsinline id="background-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+    <div class="video-fallback"></div>
+    <div class="bg-overlay-heavy"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 sm:py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 sm:gap-3 group">
+                <div class="bg-[#001f3f] p-1.5 sm:p-2 rounded-lg shadow-xl border border-white/10">
+                    <svg viewBox="0 0 100 100" class="w-6 h-6 sm:w-9 sm:h-9">
+                        <path d="M50 10 L85 45 L15 45 Z" fill="#f58220" />
+                        <rect x="42" y="30" width="16" height="30" fill="#f58220" />
+                        <path d="M15 45 L50 80 L85 45" fill="#808080" />
+                    </svg>
+                </div>
+                <div class="flex flex-col leading-none">
+                    <span class="text-xl sm:text-3xl font-black tracking-tighter italic uppercase text-white">INFRANEX</span>
+                    <span class="text-[8px] sm:text-[11px] font-bold tracking-[0.4em] uppercase opacity-90 text-orange-400">Projects & Services</span>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-12">
+                <a href="#home" class="text-[11px] font-black uppercase tracking-[0.4em] text-white hover:text-orange-500 transition-colors">Home</a>
+                <a href="#services" class="text-[11px] font-black uppercase tracking-[0.4em] text-white hover:text-orange-500 transition-colors">Services</a>
+                <a href="#faq" class="text-[11px] font-black uppercase tracking-[0.4em] text-white hover:text-orange-500 transition-colors">FAQ</a>
+                <a href="#contact" class="text-[11px] font-black uppercase tracking-[0.4em] text-white hover:text-orange-500 transition-colors">Contact</a>
+                <a href="tel:0753824966" class="bg-orange-600 text-white px-8 py-3 rounded-full font-black text-[11px] uppercase tracking-widest hover:bg-orange-700 transition-all hover:scale-105 shadow-lg shadow-orange-600/30">
+                    Call 0753 824 966
+                </a>
+            </div>
+
+            <button id="menu-toggle" class="lg:hidden p-3 rounded-xl glass-panel text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <div id="sidebar" class="fixed inset-0 bg-slate-900 z-[60] transition-transform duration-500 lg:hidden translate-x-full">
+        <div class="flex justify-between items-center p-8 border-b border-white/5">
+            <div class="flex items-center gap-3">
+                <div class="bg-[#001f3f] p-2 rounded-lg border border-white/10">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8"><path d="M50 10 L85 45 L15 45 Z" fill="#f58220" /><rect x="42" y="30" width="16" height="30" fill="#f58220" /><path d="M15 45 L50 80 L85 45" fill="#808080" /></svg>
+                </div>
+                <span class="text-2xl font-black italic uppercase text-white">INFRANEX</span>
+            </div>
+            <button id="close-menu"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div>
+        <div class="flex flex-col p-8 space-y-6">
+            <a href="#home" class="mobile-link text-3xl font-black italic uppercase tracking-tighter text-white border-b border-white/5 pb-6">Home</a>
+            <a href="#services" class="mobile-link text-3xl font-black italic uppercase tracking-tighter text-white border-b border-white/5 pb-6">Services</a>
+            <a href="#faq" class="mobile-link text-3xl font-black italic uppercase tracking-tighter text-white border-b border-white/5 pb-6">FAQ</a>
+            <a href="#contact" class="mobile-link text-3xl font-black italic uppercase tracking-tighter text-white border-b border-white/5 pb-6">Contact</a>
+            <div class="pt-8 space-y-4">
+                <a href="tel:0753824966" class="flex items-center justify-center gap-4 w-full bg-orange-600 text-white py-6 rounded-2xl font-black uppercase italic tracking-widest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call Bruce</a>
+                <a href="https://wa.me/27753824966" class="flex items-center justify-center gap-4 w-full bg-[#25D366] text-white py-6 rounded-2xl font-black uppercase italic tracking-widest">
+                    <svg viewBox="0 0 24 24" width="24" height="24" class="fill-current"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp Us
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative px-4 pt-20">
+        <div class="text-center max-w-5xl">
+            <span class="reveal bg-orange-600/20 backdrop-blur-md border border-orange-500/30 text-orange-400 px-6 py-2 rounded-full text-[10px] sm:text-[12px] font-black uppercase tracking-[0.4em] mb-10 inline-block">
+                Engineering Aquatic Perfection
+            </span>
+            <h1 class="reveal text-5xl sm:text-7xl md:text-9xl font-black text-white mb-8 uppercase tracking-tighter leading-[0.9] italic px-2">
+                Pool Excellence <span class="text-orange-500 block not-italic">Can't Wait.</span>
+            </h1>
+            <p class="reveal text-lg sm:text-2xl md:text-3xl text-slate-200 mb-14 max-w-3xl mx-auto font-medium px-4 leading-relaxed">
+                From luxury custom builds to rapid response leak repairs. <br class="hidden sm:block">Serving South Africa's heartland with owner-supervised quality.
+            </p>
+            <div class="reveal flex flex-col sm:flex-row gap-6 justify-center px-4">
+                <a href="https://wa.me/27753824966" class="bg-[#25D366] text-white font-black py-5 px-12 rounded-2xl text-lg hover:scale-105 transition-all flex items-center justify-center shadow-2xl shadow-emerald-500/20">
+                    <svg viewBox="0 0 24 24" width="28" height="28" class="fill-current mr-4"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    WHATSAPP BRUCE
+                </a>
+                <a href="#contact" class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-black py-5 px-12 rounded-2xl text-lg hover:bg-white/20 transition-all flex items-center justify-center">
+                    GET A FREE QUOTE
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="relative z-10 px-4 -mt-16">
+        <div class="reveal max-w-7xl mx-auto glass-panel p-10 sm:p-16 rounded-[3rem] shadow-2xl grid grid-cols-1 md:grid-cols-3 gap-12 text-center text-white">
+            <div class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f58220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <h3 class="font-black text-xl uppercase tracking-widest italic mb-2">24/7 Response</h3>
+                <p class="text-slate-400 text-sm sm:text-base">Emergency Repairs Always Taken</p>
+            </div>
+            <div class="flex flex-col items-center border-y md:border-y-0 md:border-x border-white/10 py-10 md:py-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f58220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <h3 class="font-black text-xl uppercase tracking-widest italic mb-2">Owner Supervised</h3>
+                <p class="text-slate-400 text-sm sm:text-base">Guaranteed Quality Finishes</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f58220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <h3 class="font-black text-xl uppercase tracking-widest italic mb-2">Gauteng & Beyond</h3>
+                <p class="text-slate-400 text-sm sm:text-base">On-site response in all provinces</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <section id="services" class="py-24 sm:py-40 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-4xl sm:text-7xl font-black text-white uppercase tracking-tighter italic">Our <span class="text-orange-500 not-italic">Specialties</span></h2>
+                <div class="w-24 h-2 bg-orange-600 mx-auto mt-8 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Fibreglass -->
+                <div class="reveal group p-10 rounded-[2.5rem] shadow-2xl border-b-[10px] border-orange-500 transition-all hover:-translate-y-4 glass-panel">
+                    <div class="flex flex-col sm:flex-row gap-8 items-start">
+                        <div class="w-20 h-20 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-all text-orange-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black mb-5 uppercase tracking-wide italic text-white leading-tight">Fibreglass Pools</h3>
+                            <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">We offer high-grade UV-resistant fibreglass installations that are non-porous and easy to maintain. Our process ensures a quick turnaround without compromising structural integrity, available in various modern shapes and vibrant color finishes.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Marbelite -->
+                <div class="reveal group p-10 rounded-[2.5rem] shadow-2xl border-b-[10px] border-blue-600 transition-all hover:-translate-y-4 glass-panel">
+                    <div class="flex flex-col sm:flex-row gap-8 items-start">
+                        <div class="w-20 h-20 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-all text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black mb-5 uppercase tracking-wide italic text-white leading-tight">Marbelite Finish</h3>
+                            <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">For a classic, premium aesthetic, our Marbelite hand-plastered finishes provide a smooth, durable, and slip-resistant surface. This traditional cement-based finish is perfect for custom-shaped pools and offers unmatched longevity in South African climates.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Renovations -->
+                <div class="reveal group p-10 rounded-[2.5rem] shadow-2xl border-b-[10px] border-slate-500 transition-all hover:-translate-y-4 glass-panel">
+                    <div class="flex flex-col sm:flex-row gap-8 items-start">
+                        <div class="w-20 h-20 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-all text-slate-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black mb-5 uppercase tracking-wide italic text-white leading-tight">Total Renovations</h3>
+                            <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">Breathe new life into aging pools. Our renovation services cover everything from coping stone replacement and mosaic tiling to pump room modernization and structural reshaping, ensuring your investment regains its original splendor.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repairs -->
+                <div class="reveal group p-10 rounded-[2.5rem] shadow-2xl border-b-[10px] border-red-600 transition-all hover:-translate-y-4 glass-panel">
+                    <div class="flex flex-col sm:flex-row gap-8 items-start">
+                        <div class="w-20 h-20 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-all text-red-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black mb-5 uppercase tracking-wide italic text-white leading-tight">Leak & Repairs</h3>
+                            <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">Using advanced pressure testing and dye detection, we locate and repair leaks with precision. We specialize in structural crack injection and re-lining, preventing water loss and protecting your property's foundation from erosion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 sm:py-40 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter italic">Technical <span class="text-orange-500 not-italic">Guidance</span></h2>
+            </div>
+            
+            <div class="space-y-5">
+                <!-- FAQ Items -->
+                <div class="reveal faq-item glass-panel rounded-[2rem] shadow-xl transition-all">
+                    <button class="faq-btn w-full flex justify-between items-center p-8 text-left">
+                        <span class="font-black uppercase tracking-tight italic text-base sm:text-xl text-white pr-6">How long does a pool renovation typically take?</span>
+                        <svg class="faq-icon text-orange-500 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="faq-content px-8 text-slate-300 font-medium text-sm sm:text-lg leading-relaxed">
+                        <div class="border-t border-white/5 pt-6">
+                            Most renovations are completed within 7 to 14 days. Simple re-marbeliting or re-fibreglassing can often be done even faster under Bruce's direct supervision.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal faq-item glass-panel rounded-[2rem] shadow-xl transition-all">
+                    <button class="faq-btn w-full flex justify-between items-center p-8 text-left">
+                        <span class="font-black uppercase tracking-tight italic text-base sm:text-xl text-white pr-6">Do you offer a guarantee on repairs?</span>
+                        <svg class="faq-icon text-orange-500 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="faq-content px-8 text-slate-300 font-medium text-sm sm:text-lg leading-relaxed">
+                        <div class="border-t border-white/5 pt-6">
+                            Yes! All our structural crack repairs and leak fixing services come with a workmanship guarantee to ensure your peace of mind.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal faq-item glass-panel rounded-[2rem] shadow-xl transition-all">
+                    <button class="faq-btn w-full flex justify-between items-center p-8 text-left">
+                        <span class="font-black uppercase tracking-tight italic text-base sm:text-xl text-white pr-6">Fibreglass or Marbelite?</span>
+                        <svg class="faq-icon text-orange-500 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="faq-content px-8 text-slate-300 font-medium text-sm sm:text-lg leading-relaxed">
+                        <div class="border-t border-white/5 pt-6">
+                            Fibreglass is faster to install and low maintenance, while Marbelite offers a premium, customizable classic finish. We guide you based on your needs.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal faq-item glass-panel rounded-[2rem] shadow-xl transition-all">
+                    <button class="faq-btn w-full flex justify-between items-center p-8 text-left">
+                        <span class="font-black uppercase tracking-tight italic text-base sm:text-xl text-white pr-6">Are you open on weekends and holidays?</span>
+                        <svg class="faq-icon text-orange-500 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="faq-content px-8 text-slate-300 font-medium text-sm sm:text-lg leading-relaxed">
+                        <div class="border-t border-white/5 pt-6">
+                            Absolutely. Pool emergencies don't wait, so we are available 24/7 for urgent technical assistance.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal faq-item glass-panel rounded-[2rem] shadow-xl transition-all">
+                    <button class="faq-btn w-full flex justify-between items-center p-8 text-left">
+                        <span class="font-black uppercase tracking-tight italic text-base sm:text-xl text-white pr-6">Is the site visit and quote free?</span>
+                        <svg class="faq-icon text-orange-500 transition-transform duration-500" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="faq-content px-8 text-slate-300 font-medium text-sm sm:text-lg leading-relaxed">
+                        <div class="border-t border-white/5 pt-6">
+                            Yes, we provide professional on-site assessments and detailed quotes at no cost to you.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-24 sm:py-40 px-4">
+        <div class="reveal max-w-6xl mx-auto glass-panel rounded-[4rem] overflow-hidden grid lg:grid-cols-2 shadow-2xl border border-white/10">
+            <!-- Form Content -->
+            <div id="form-container" class="p-10 sm:p-20 order-2 lg:order-1">
+                <form id="contact-form" class="space-y-6">
+                    <h3 class="text-2xl font-black text-white uppercase italic tracking-widest mb-10 border-b border-white/10 pb-4">Schedule Site Visit</h3>
+                    <div class="relative">
+                        <svg class="absolute left-5 top-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <input required type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-14 pr-6 focus:ring-2 focus:ring-orange-500 outline-none text-white transition-all text-base">
+                    </div>
+                    <div class="relative">
+                        <svg class="absolute left-5 top-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <input required type="tel" placeholder="Cell Number" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-14 pr-6 focus:ring-2 focus:ring-orange-500 outline-none text-white transition-all text-base">
+                    </div>
+                    <div class="relative">
+                        <svg class="absolute left-5 top-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        <textarea required rows="4" placeholder="How can we help? (New Build, Renovations, Repairs...)" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-14 pr-6 focus:ring-2 focus:ring-orange-500 outline-none text-white transition-all text-base resize-none"></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn" class="w-full bg-orange-600 text-white font-black py-6 rounded-2xl uppercase italic tracking-[0.3em] shadow-xl hover:bg-orange-700 transition-all flex items-center justify-center gap-4 text-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        <span id="btn-text">Request Site Visit</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="p-10 sm:p-20 bg-orange-600 text-white order-1 lg:order-2 flex flex-col justify-center">
+                <h2 class="text-5xl sm:text-7xl font-black uppercase italic tracking-tighter mb-10 leading-[0.9]">Dive into <span class="text-slate-900 not-italic">Quality.</span></h2>
+                <p class="text-orange-50 text-lg sm:text-xl font-medium mb-16 leading-relaxed opacity-90">
+                    Expert pool solutions at your fingertips. From major renovations to precision leak fixing, Infranex Projects is your 24/7 technical partner.
+                </p>
+                
+                <div class="space-y-10">
+                    <div class="flex items-start gap-6">
+                        <div class="bg-white/20 p-4 rounded-2xl"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                        <div>
+                            <p class="text-xs uppercase font-black tracking-widest opacity-70 mb-1">Direct Line</p>
+                            <p class="text-2xl font-bold tracking-tight">075 382 4966</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="bg-white/20 p-4 rounded-2xl"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                        <div>
+                            <p class="text-xs uppercase font-black tracking-widest opacity-70 mb-1">Service Coverage</p>
+                            <p class="text-2xl font-bold tracking-tight">GP, LP & MP Provinces</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHATSAPP FAB -->
+    <a href="https://wa.me/27753824966" target="_blank" rel="noopener noreferrer" class="whatsapp-fab shadow-emerald-500/50">
+        <svg viewBox="0 0 24 24" class="w-full h-full fill-white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-20 text-center border-t border-white/5 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-center gap-3 mb-10">
+                <div class="bg-[#001f3f] p-2 rounded-lg border border-white/10">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8"><path d="M50 10 L85 45 L15 45 Z" fill="#f58220" /><rect x="42" y="30" width="16" height="30" fill="#f58220" /><path d="M15 45 L50 80 L85 45" fill="#808080" /></svg>
+                </div>
+                <div class="flex flex-col leading-none text-left">
+                    <span class="text-2xl font-black italic uppercase text-white">INFRANEX</span>
+                    <span class="text-[10px] font-bold tracking-[0.4em] uppercase opacity-90 text-orange-400">Projects & Services</span>
+                </div>
+            </div>
+            <div class="w-full h-px bg-white/5 my-14"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-[10px] sm:text-xs font-black uppercase tracking-[0.4em]">
+                <p>&copy; <span id="year"></span> Infranex Projects. Professional Pool Contractors.</p>
+                <div class="flex gap-10">
+                    <a href="#services" class="hover:text-orange-500 transition-colors">Services</a>
+                    <a href="#faq" class="hover:text-orange-500 transition-colors">Technical Help</a>
+                    <a href="tel:0753824966" class="text-white hover:text-orange-500 italic transition-all">Call Bruce</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 800);
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900/95', 'backdrop-blur-xl', 'py-3', 'shadow-2xl', 'border-b', 'border-white/5');
+                navbar.classList.remove('bg-transparent', 'py-6', 'sm:py-10');
+            } else {
+                navbar.classList.remove('bg-slate-900/95', 'backdrop-blur-xl', 'py-3', 'shadow-2xl', 'border-b', 'border-white/5');
+                navbar.classList.add('bg-transparent', 'py-6', 'sm:py-10');
+            }
+
+            // Scroll Reveal Logic
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    el.classList.add('reveal-visible');
+                }
+            });
+        });
+
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuToggle.addEventListener('click', () => sidebar.classList.remove('translate-x-full'));
+        closeMenu.addEventListener('click', () => sidebar.classList.add('translate-x-full'));
+        mobileLinks.forEach(link => link.addEventListener('click', () => sidebar.classList.add('translate-x-full')));
+
+        // FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.faq-btn');
+            btn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Close all
+                faqItems.forEach(i => i.classList.remove('active'));
+                // Toggle clicked
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Form Submission Simulation
+        const contactForm = document.getElementById('contact-form');
+        const formContainer = document.getElementById('form-container');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="inline-block w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></span>';
+
+            setTimeout(() => {
+                formContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-20">
+                        <div class="w-24 h-24 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                        <h3 class="text-3xl font-black text-white uppercase italic mb-4">Request Sent!</h3>
+                        <p class="text-slate-300 text-lg">Bruce will call you back shortly.</p>
+                        <button onclick="location.reload()" class="mt-10 text-orange-500 font-bold uppercase tracking-[0.3em] text-xs underline">Send Another Message</button>
+                    </div>
+                `;
+            }, 1800);
+        });
+
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Trigger initial reveal
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>
